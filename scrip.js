@@ -39,7 +39,7 @@ document.querySelectorAll(".btn-info").forEach(function (boton) {
 // URL BASE DE TU BACKEND
 // Cuando tengas tu link de Render, ponlo aquí (ej: "https://hotel-backend.onrender.com")
 // const BASE_URL = "http://localhost:3000"; // Usa esta línea solo cuando programes localmente
-const BASE_URL = "https://AQUI-PON-TU-LINK-REAL-DE-RAILWAY.up.railway.app"; 
+const BASE_URL = "https://hotel-backend-3-s5xp.onrender.com"; 
 
 const API_USUARIOS = `${BASE_URL}/api/usuarios`;
 const API_RESERVAS = `${BASE_URL}/api/reservas`;
