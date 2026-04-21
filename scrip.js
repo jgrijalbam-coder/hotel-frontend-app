@@ -36,9 +36,7 @@ document.querySelectorAll(".btn-info").forEach(function (boton) {
   });
 });
 
-// URL BASE DE TU BACKEND
-// Cuando tengas tu link de Render, ponlo aquí (ej: "https://hotel-backend.onrender.com")
-// const BASE_URL = "http://localhost:3000"; // Usa esta línea solo cuando programes localmente
+
 const BASE_URL = "https://hotel-backend-3-s5xp.onrender.com"; 
 
 const API_USUARIOS = `${BASE_URL}/api/usuarios`;
@@ -1329,6 +1327,10 @@ if (formRegistro) {
       password: document.getElementById("password").value
     };
 
+    // 1. Mostrar estado de carga para que no parezca que "no hace nada"
+    mensajeRegistro.textContent = "Conectando con el servidor... (puede tardar hasta 50s)";
+    mensajeRegistro.style.color = "#C6A75E";
+
     try {
       const respuesta = await fetch(`${API_USUARIOS}/registro`, {
         method: "POST",
@@ -1338,7 +1340,13 @@ if (formRegistro) {
         body: JSON.stringify(datosRegistro)
       });
 
-      const resultado = await respuesta.json();
+      // Atrapamos si el servidor devuelve HTML de error en lugar de JSON
+      let resultado;
+      try {
+        resultado = await respuesta.json();
+      } catch (e) {
+        throw new Error("El servidor Render está caído o devolvió un Error 500.");
+      }
 
       if (respuesta.ok) {
         mensajeRegistro.textContent = resultado.mensaje || "Usuario registrado correctamente";
@@ -1356,7 +1364,7 @@ if (formRegistro) {
       }
     } catch (error) {
       console.error("Error en registro:", error);
-      mensajeRegistro.textContent = "No se pudo conectar con el servidor";
+      mensajeRegistro.textContent = "Error: " + error.message;
       mensajeRegistro.style.color = "red";
     }
   });
@@ -1371,6 +1379,10 @@ if (formLogin) {
       password: document.getElementById("loginPassword").value
     };
 
+    // 2. Mostrar estado de carga para el Login
+    mensajeLogin.textContent = "Iniciando sesión... por favor espera.";
+    mensajeLogin.style.color = "#C6A75E";
+
     try {
       const respuesta = await fetch(`${API_USUARIOS}/login`, {
         method: "POST",
@@ -1380,7 +1392,12 @@ if (formLogin) {
         body: JSON.stringify(datosLogin)
       });
 
-      const resultado = await respuesta.json();
+      let resultado;
+      try {
+        resultado = await respuesta.json();
+      } catch (e) {
+        throw new Error("El servidor Render está caído o devolvió un Error 500.");
+      }
 
       if (respuesta.ok) {
         mensajeLogin.textContent = resultado.mensaje || "Inicio de sesión exitoso";
@@ -1400,7 +1417,7 @@ if (formLogin) {
       }
     } catch (error) {
       console.error("Error en login:", error);
-      mensajeLogin.textContent = "No se pudo conectar con el servidor";
+      mensajeLogin.textContent = "Error: " + error.message;
       mensajeLogin.style.color = "red";
     }
   });
@@ -2321,41 +2338,6 @@ async function cargarHabitacionesAdmin() {
 }
 
 window.actualizarEstadoHabitacionAdmin = async function(idHabitacion, nuevoEstado) {
-    const mensajeConfirmacion = nuevoEstado === "mantenimiento"
-        ? "¿Quieres marcar esta habitación como mantenimiento?"
-        : "¿Quieres volver a marcar esta habitación como disponible?";
-
-    if (!confirm(mensajeConfirmacion)) return;
-
-    try {
-        const respuesta = await authFetch(`${API_HABITACIONES}/${idHabitacion}/estado`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ nuevoEstado })
-        });
-
-        const resultado = await respuesta.json();
-
-        if (!respuesta.ok) {
-            mostrarNotificacionFlotante(resultado.mensaje || "No se pudo actualizar la habitación.", "#c62828");
-            return;
-        }
-
-        habitacionesAdminCache = [];
-        await Promise.all([
-            cargarHabitacionesAdmin(),
-            cargarReportesAdmin()
-        ]);
-
-        mostrarNotificacionFlotante(resultado.mensaje || "Estado de habitación actualizado.", "#1B263B");
-    } catch (error) {
-        console.error("Error al actualizar estado de habitación:", error);
-        mostrarNotificacionFlotante("No se pudo conectar con el servidor para actualizar la habitación.", "#c62828");
-    }
-};
-window.actualizarEstadoHabitacionAdmin = async function(idHabitacion, nuevoEstado) {
     const mensaje = nuevoEstado === "mantenimiento"
         ? "¿Quieres marcar esta habitación como mantenimiento?"
         : "¿Quieres volver a marcar esta habitación como disponible?";
@@ -2398,42 +2380,6 @@ window.actualizarEstadoHabitacionAdmin = async function(idHabitacion, nuevoEstad
     }
 };
 
-window.actualizarAccesoUsuarioAdmin = async function(idUsuario, bloqueado, estado) {
-    const accion = bloqueado ? "bloquear" : "actualizar";
-    const confirmo = await confirmarEnPagina({
-        titulo: "Actualizar usuario",
-        mensaje: `¿Quieres ${accion} este usuario?`,
-        textoAceptar: "Sí, continuar",
-        textoCancelar: "Volver"
-    });
-
-    if (!confirmo) return;
-
-    try {
-        const respuesta = await authFetch(`${API_USUARIOS}/${idUsuario}/acceso`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ bloqueado, estado })
-        });
-
-        const resultado = await respuesta.json();
-
-        if (!respuesta.ok) {
-            mostrarNotificacionFlotante(resultado.mensaje || "No se pudo actualizar el usuario.", "#c62828");
-            return;
-        }
-
-        usuariosAdminCache = [];
-        await cargarUsuariosAdmin();
-        mostrarNotificacionFlotante(resultado.mensaje || "Usuario actualizado correctamente.", "#1B263B");
-    } catch (error) {
-        console.error("Error al actualizar acceso del usuario:", error);
-        mostrarNotificacionFlotante("No se pudo conectar con el servidor para actualizar el usuario.", "#c62828");
-    }
-};
-
 window.cambiarEstadoReserva = async function(id, nuevoEstado) {
     const confirmo = await confirmarEnPagina({
         titulo: "Actualizar reserva",
@@ -2450,122 +2396,22 @@ window.cambiarEstadoReserva = async function(id, nuevoEstado) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ nuevoEstado })
         });
+        
+        const resultado = await respuesta.json();
 
         if (respuesta.ok) {
             reservasAdminCache = [];
             habitacionesAdminCache = [];
-            mostrarNotificacionFlotante(`Reserva actualizada a ${obtenerMetaEstadoReserva(nuevoEstado).texto}`, "#2e7d32");
+            mostrarNotificacionFlotante(resultado.mensaje || `Reserva actualizada a ${obtenerMetaEstadoReserva(nuevoEstado).texto}`, "#2e7d32");
             cargarTablaReservasRecepcion();
             cargarReportesAdmin();
             cargarHabitacionesAdmin();
+        } else {
+            mostrarNotificacionFlotante(resultado.mensaje || "No se pudo actualizar la reserva.", "#c62828");
         }
     } catch (error) {
         console.error("Error al actualizar estado", error);
-    }
-};
-async function manejarCancelacionReserva(idReserva) {
-  const confirmo = await confirmarEnPagina({
-    titulo: "Cancelar reserva",
-    mensaje: "¿Estás seguro de que deseas cancelar esta reserva? Esta acción no se puede deshacer.",
-    textoAceptar: "Sí, cancelar",
-    textoCancelar: "No cancelar"
-  });
-
-  if (!confirmo) return;
-
-  try {
-    const respuesta = await authFetch(`${API_RESERVAS}/${idReserva}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-
-    const resultado = await respuesta.json();
-
-    if (respuesta.ok) {
-      mostrarNotificacionFlotante(resultado.mensaje || "Reserva cancelada exitosamente.", "#dc3545");
-      await cargarReservasUsuario();
-      await refrescarEstadoHabitaciones();
-    } else {
-      mostrarNotificacionFlotante(resultado.mensaje || "Error al cancelar la reserva.", "#ffc107");
-    }
-  } catch (error) {
-    console.error("Error al cancelar reserva:", error);
-    mostrarNotificacionFlotante("No se pudo conectar con el servidor para cancelar la reserva.", "#ffc107");
-  }
-}
-
-async function cancelarMiReserva(id) {
-  const confirmo = await confirmarEnPagina({
-    titulo: "Cancelar reserva",
-    mensaje: "¿Deseas cancelar esta reserva? La habitación quedará disponible para otros huéspedes.",
-    textoAceptar: "Sí, cancelar",
-    textoCancelar: "Volver"
-  });
-
-  if (!confirmo) return;
-
-  try {
-    const respuesta = await authFetch(`${API_RESERVAS}/${id}`, {
-      method: "DELETE"
-    });
-
-    const resultado = await respuesta.json();
-
-    if (respuesta.ok) {
-      mostrarNotificacionFlotante(resultado.mensaje || "Reserva cancelada.", "#8c2f39");
-      await cargarReservasUsuario();
-      await refrescarEstadoHabitaciones();
-    } else {
-      mostrarNotificacionFlotante(resultado.mensaje || "No se pudo cancelar.", "#c62828");
-    }
-  } catch (error) {
-    console.error("Error al cancelar:", error);
-    mostrarNotificacionFlotante("No se pudo conectar con el servidor para cancelar la reserva.", "#c62828");
-  }
-}
-
-window.actualizarEstadoHabitacionAdmin = async function(idHabitacion, nuevoEstado) {
-    const mensaje = nuevoEstado === "mantenimiento"
-        ? "¿Quieres marcar esta habitación como mantenimiento?"
-        : "¿Quieres volver a marcar esta habitación como disponible?";
-
-    const confirmo = await confirmarEnPagina({
-        titulo: "Actualizar habitación",
-        mensaje,
-        textoAceptar: "Sí, continuar",
-        textoCancelar: "Volver"
-    });
-
-    if (!confirmo) return;
-
-    try {
-        const respuesta = await authFetch(`${API_HABITACIONES}/${idHabitacion}/estado`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ nuevoEstado })
-        });
-
-        const resultado = await respuesta.json();
-
-        if (!respuesta.ok) {
-            mostrarNotificacionFlotante(resultado.mensaje || "No se pudo actualizar la habitación.", "#c62828");
-            return;
-        }
-
-        habitacionesAdminCache = [];
-        await Promise.all([
-            cargarHabitacionesAdmin(),
-            cargarReportesAdmin()
-        ]);
-
-        mostrarNotificacionFlotante(resultado.mensaje || "Estado de habitación actualizado.", "#1B263B");
-    } catch (error) {
-        console.error("Error al actualizar estado de habitación:", error);
-        mostrarNotificacionFlotante("No se pudo conectar con el servidor para actualizar la habitación.", "#c62828");
+        mostrarNotificacionFlotante("No se pudo conectar con el servidor.", "#c62828");
     }
 };
 
@@ -2579,65 +2425,6 @@ window.actualizarAccesoUsuarioAdmin = async function(idUsuario, bloqueado, estad
     });
 
     if (!confirmo) return;
-
-    try {
-        const respuesta = await authFetch(`${API_USUARIOS}/${idUsuario}/acceso`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ bloqueado, estado })
-        });
-
-        const resultado = await respuesta.json();
-
-        if (!respuesta.ok) {
-            mostrarNotificacionFlotante(resultado.mensaje || "No se pudo actualizar el usuario.", "#c62828");
-            return;
-        }
-
-        usuariosAdminCache = [];
-        await cargarUsuariosAdmin();
-        mostrarNotificacionFlotante(resultado.mensaje || "Usuario actualizado correctamente.", "#1B263B");
-    } catch (error) {
-        console.error("Error al actualizar acceso del usuario:", error);
-        mostrarNotificacionFlotante("No se pudo conectar con el servidor para actualizar el usuario.", "#c62828");
-    }
-};
-
-window.cambiarEstadoReserva = async function(id, nuevoEstado) {
-    const confirmo = await confirmarEnPagina({
-        titulo: "Actualizar reserva",
-        mensaje: `¿Estás seguro de marcar esta reserva como ${nuevoEstado}?`,
-        textoAceptar: "Sí, actualizar",
-        textoCancelar: "Volver"
-    });
-
-    if (!confirmo) return;
-
-    try {
-        const respuesta = await authFetch(`${API_RESERVAS}/${id}/estado`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ nuevoEstado })
-        });
-
-        if (respuesta.ok) {
-            reservasAdminCache = [];
-            habitacionesAdminCache = [];
-            mostrarNotificacionFlotante(`Reserva actualizada a ${obtenerMetaEstadoReserva(nuevoEstado).texto}`, "#2e7d32");
-            cargarTablaReservasRecepcion();
-            cargarReportesAdmin();
-            cargarHabitacionesAdmin();
-        }
-    } catch (error) {
-        console.error("Error al actualizar estado", error);
-    }
-};
-
-window.actualizarAccesoUsuarioAdmin = async function(idUsuario, bloqueado, estado) {
-    const accion = bloqueado ? "bloquear" : "actualizar";
-    if (!confirm(`¿Quieres ${accion} este usuario?`)) return;
 
     try {
         const respuesta = await authFetch(`${API_USUARIOS}/${idUsuario}/acceso`, {
@@ -2805,133 +2592,3 @@ const observerServicios = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.servicio').forEach(s => observerServicios.observe(s));
-
-window.cambiarEstadoReserva = async function(id, nuevoEstado) {
-    if (!confirm(`¿Estás seguro de marcar esta reserva como ${nuevoEstado}?`)) return;
-    try {
-        const respuesta = await authFetch(`${API_RESERVAS}/${id}/estado`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nuevoEstado })
-        });
-        if (respuesta.ok) {
-            reservasAdminCache = [];
-            habitacionesAdminCache = [];
-            mostrarNotificacionFlotante(`Reserva actualizada a ${obtenerMetaEstadoReserva(nuevoEstado).texto}`, '#2e7d32');
-            cargarTablaReservasRecepcion();
-            cargarReportesAdmin();
-            cargarHabitacionesAdmin();
-        }
-    } catch (error) {
-        console.error("Error al actualizar estado", error);
-    }
-};
-
-window.actualizarEstadoHabitacionAdmin = async function(idHabitacion, nuevoEstado) {
-    const mensaje = nuevoEstado === "mantenimiento"
-        ? "Quieres marcar esta habitación como mantenimiento?"
-        : "Quieres volver a marcar esta habitación como disponible?";
-
-    const confirmo = await confirmarEnPagina({
-        titulo: "Actualizar habitación",
-        mensaje,
-        textoAceptar: "Sí, continuar",
-        textoCancelar: "Volver"
-    });
-
-    if (!confirmo) return;
-
-    try {
-        const respuesta = await authFetch(`${API_HABITACIONES}/${idHabitacion}/estado`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ nuevoEstado })
-        });
-
-        const resultado = await respuesta.json();
-
-        if (!respuesta.ok) {
-            mostrarNotificacionFlotante(resultado.mensaje || "No se pudo actualizar la habitación.", "#c62828");
-            return;
-        }
-
-        habitacionesAdminCache = [];
-        await Promise.all([
-            cargarHabitacionesAdmin(),
-            cargarReportesAdmin()
-        ]);
-
-        mostrarNotificacionFlotante(resultado.mensaje || "Estado de habitación actualizado.", "#1B263B");
-    } catch (error) {
-        console.error("Error al actualizar estado de habitación:", error);
-        mostrarNotificacionFlotante("No se pudo conectar con el servidor para actualizar la habitación.", "#c62828");
-    }
-};
-
-window.actualizarAccesoUsuarioAdmin = async function(idUsuario, bloqueado, estado) {
-    const accion = bloqueado ? "bloquear" : "actualizar";
-    const confirmo = await confirmarEnPagina({
-        titulo: "Actualizar usuario",
-        mensaje: `Quieres ${accion} este usuario?`,
-        textoAceptar: "Sí, continuar",
-        textoCancelar: "Volver"
-    });
-
-    if (!confirmo) return;
-
-    try {
-        const respuesta = await authFetch(`${API_USUARIOS}/${idUsuario}/acceso`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ bloqueado, estado })
-        });
-
-        const resultado = await respuesta.json();
-
-        if (!respuesta.ok) {
-            mostrarNotificacionFlotante(resultado.mensaje || "No se pudo actualizar el usuario.", "#c62828");
-            return;
-        }
-
-        usuariosAdminCache = [];
-        await cargarUsuariosAdmin();
-        mostrarNotificacionFlotante(resultado.mensaje || "Usuario actualizado correctamente.", "#1B263B");
-    } catch (error) {
-        console.error("Error al actualizar acceso del usuario:", error);
-        mostrarNotificacionFlotante("No se pudo conectar con el servidor para actualizar el usuario.", "#c62828");
-    }
-};
-
-window.cambiarEstadoReserva = async function(id, nuevoEstado) {
-    const confirmo = await confirmarEnPagina({
-        titulo: "Actualizar reserva",
-        mensaje: `¿Estás seguro de marcar esta reserva como ${nuevoEstado}?`,
-        textoAceptar: "Sí, actualizar",
-        textoCancelar: "Volver"
-    });
-
-    if (!confirmo) return;
-
-    try {
-        const respuesta = await authFetch(`${API_RESERVAS}/${id}/estado`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ nuevoEstado })
-        });
-
-        if (respuesta.ok) {
-            reservasAdminCache = [];
-            habitacionesAdminCache = [];
-            mostrarNotificacionFlotante(`Reserva actualizada a ${obtenerMetaEstadoReserva(nuevoEstado).texto}`, "#2e7d32");
-            cargarTablaReservasRecepcion();
-            cargarReportesAdmin();
-            cargarHabitacionesAdmin();
-        }
-    } catch (error) {
-        console.error("Error al actualizar estado", error);
-    }
-};
