@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Boutique</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+
+        <img class="bg" src="images/Hotel.jpg" alt="Hotel">
+
+        <div class="overlay"></div>
+
+        <div class="menu">
+            <div class="container menu-content">
+
+                <a href="#" class="logo">Hotel Boutique</a>
+
+                <nav class="navbar">
+                    <ul>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#habitaciones">Habitaciones</a></li>
+                        <li><a href="#reservar">Contacto</a></li>
+                    </ul>
+                </nav>
+
+                <div class="auth-buttons" id="authButtons">
+                    <a href="#" class="iniciar-btn" id="abrirLogin">Iniciar sesión</a>
+                    <a href="#" class="registrarse-btn" id="abrirRegistro">Registrarse</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="header-content container">
+            <div class="header-txt">
+                <span class="hero-kicker">Luxury stay · Bogotá</span>
+                <h1>HOTEL BOUTIQUE</h1>
+                <p>Experiencia, confort y exclusividad</p>
+
+                <div class="botones">
+                    <a href="#habitaciones" class="btn-1">VER HABITACIONES</a>
+                    <a href="#reservar" class="btn-2">RESERVAR AHORA</a>
+                </div>
+
+                <div class="hero-highlights">
+                    <span><i class="fas fa-star"></i> Atención personalizada</span>
+                    <span><i class="fas fa-spa"></i> Ambiente exclusivo</span>
+                    <span><i class="fas fa-moon"></i> Noches memorables</span>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <section id="habitaciones" class="habitaciones container">
+        <h2>Habitaciones</h2>
+        <p>
+            Espacios diseñados con elegancia y atención para brindarte la mejor experiencia.
+        </p>
+
+        <div class="habitaciones-content">
+
+            <div class="habitacion" data-id-habitacion="1">
+                <img src="images/hb1.jpeg" alt="Habitación estándar">
+                <h3>Estándar</h3>
+                <p class="precio">$120.000 / noche</p>
+                <button class="btn-info">Ver información</button>
+
+                <div class="info-habitacion">
+                    <p>Un refugio acogedor diseñado para el descanso perfecto.</p>
+                    <div class="features-grid">
+                        <div class="feature-item"><i class="fas fa-wifi"></i> WiFi Gratis</div>
+                        <div class="feature-item"><i class="fas fa-tv"></i> Smart TV</div>
+                        <div class="feature-item"><i class="fas fa-snowflake"></i> Aire Acond.</div>
+                        <div class="feature-item"><i class="fas fa-coffee"></i> Desayuno</div>
+                    </div>
+                    <a href="#reservar" class="btn-reservar" data-id-habitacion="1">Reservar</a>
+                </div>
+            </div>
+
+            <div class="habitacion" data-id-habitacion="2">
+                <img src="images/photo-1702411200201-3061d0eea802.jpeg" alt="Suite">
+                <h3>Suite</h3>
+                <p class="precio">$250.000 / noche</p>
+                <button class="btn-info">Ver información</button>
+
+                <div class="info-habitacion">
+                    <p>Exclusividad y vistas incomparables en cada rincón.</p>
+                    <div class="features-grid">
+                        <div class="feature-item"><i class="fas fa-bed"></i> Cama King</div>
+                        <div class="feature-item"><i class="fas fa-mountain"></i> Balcón</div>
+                        <div class="feature-item"><i class="fas fa-cocktail"></i> Minibar</div>
+                        <div class="feature-item"><i class="fas fa-bath"></i> Jacuzzi</div>
+                    </div>
+                    <a href="#reservar" class="btn-reservar" data-id-habitacion="2">Reservar</a>
+                </div>
+            </div>
+
+            <div class="habitacion" data-id-habitacion="3">
+                <img src="images/hb3.jpeg" alt="Habitación familiar">
+                <h3>Familiar</h3>
+                <p class="precio">$300.000 / noche</p>
+                <button class="btn-info">Ver información</button>
+
+                <div class="info-habitacion">
+                    <p>El espacio ideal para compartir momentos inolvidables.</p>
+                    <div class="features-grid">
+                        <div class="feature-item"><i class="fas fa-users"></i> 4 Personas</div>
+                        <div class="feature-item"><i class="fas fa-concierge-bell"></i> Room Service</div>
+                        <div class="feature-item"><i class="fas fa-shield-alt"></i> Caja Fuerte</div>
+                        <div class="feature-item"><i class="fas fa-utensils"></i> Cocina Kit</div>
+                    </div>
+                    <a href="#reservar" class="btn-reservar" data-id-habitacion="3">Reservar</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="info"></section>
+
+    <section class="servicios" id="servicios">
+        <div class="container">
+            <h2>Nuestros Servicios</h2>
+            <p>Disfruta de nuestras instalaciones de primera clase</p>
+
+            <div class="servicios-content">
+
+                <div class="servicio">
+                    <div class="icono">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3>Wifi</h3>
+                    <p>Internet de alta velocidad</p>
+                </div>
+
+                <div class="servicio">
+                    <div class="icono">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <h3>Piscina</h3>
+                    <p>Piscina climatizada</p>
+                </div>
+
+                <div class="servicio">
+                    <div class="icono">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Restaurante</h3>
+                    <p>Gastronomía de lujo</p>
+                </div>
+
+                <div class="servicio">
+                    <div class="icono">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Spa</h3>
+                    <p>Relajación y bienestar</p>
+                </div>
+
+            </div>
+        </div>
+
+        <section class="buscar" id="reservar">
+            <div class="container">
+                <h2>Buscar Disponibilidad</h2>
+                <p>Encuentra la habitación perfecta para tu estadía</p>
+
+                <div class="form-busqueda">
+
+                    <div class="campo">
+                        <label for="fechaInicioReserva">Check-in</label>
+                        <input type="date" id="fechaInicioReserva">
+                    </div>
+
+                    <div class="campo">
+                        <label for="fechaFinReserva">Check-out</label>
+                        <input type="date" id="fechaFinReserva">
+                    </div>
+
+                    <div class="campo">
+                        <label for="huespedesReserva">Huéspedes</label>
+                        <input type="number" id="huespedesReserva" value="2" min="1">
+                    </div>
+
+                    <div class="campo">
+                        <label for="tipoHabitacionReserva">Tipo de habitación</label>
+                        <select id="tipoHabitacionReserva">
+                            <option value="Cualquiera">Cualquiera</option>
+                            <option value="estandar">Estándar</option>
+                            <option value="suite">Suite</option>
+                            <option value="familiar">Familiar</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="vistaReserva">Preferencia (vista)</label>
+                        <select id="vistaReserva">
+                            <option value="Cualquiera">Cualquiera</option>
+                            <option value="mar">Mar</option>
+                            <option value="ciudad">Ciudad</option>
+                            <option value="jardin">Jardín</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="pisoReserva">Preferencia (piso)</label>
+                        <select id="pisoReserva">
+                            <option value="Cualquiera">Cualquiera</option>
+                            <option value="Piso bajo">Piso bajo</option>
+                            <option value="Piso medio">Piso medio</option>
+                            <option value="Piso alto">Piso alto</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-buscar" type="button" id="btnBuscarReserva">🔎 BUSCAR</button>
+
+                    <p class="info-extra" id="mensajeReserva">
+                        Disponibilidad en tiempo real · Respuesta rápida · Diseño responsive
+                    </p>
+
+                </div>
+
+                <div id="resultadosHabitaciones" class="resultados-habitaciones"></div>
+
+                <div id="resumenReserva" class="resumen-reserva oculto">
+                    <h3>Resumen de tu reserva</h3>
+
+                    <div class="resumen-grid">
+                        <div class="resumen-item">
+                            <span>Habitación</span>
+                            <strong id="resumenHabitacion">-</strong>
+                        </div>
+                        <div class="resumen-item">
+                            <span>Tipo</span>
+                            <strong id="resumenTipo">-</strong>
+                        </div>
+                        <div class="resumen-item">
+                            <span>Vista</span>
+                            <strong id="resumenVista">-</strong>
+                        </div>
+                        <div class="resumen-item">
+                            <span>Piso</span>
+                            <strong id="resumenPiso">-</strong>
+                        </div>
+                        <div class="resumen-item">
+                            <span>Precio por noche</span>
+                            <strong id="resumenPrecio">-</strong>
+                        </div>
+                        <div class="resumen-item">
+                            <span>Noches</span>
+                            <strong id="resumenNoches">-</strong>
+                        </div>
+                    </div>
+
+                    <div class="total-reserva">
+                        Total estimado: <strong id="resumenTotal">$0</strong>
+                    </div>
+
+                    <button type="button" class="btn-confirmar-reserva" id="btnConfirmarReserva">
+                        Confirmar reserva
+                    </button>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <section id="panelRecepcionista" class="admin-dashboard oculto" style="display: none;">
+        <div class="admin-navbar">
+            <div class="admin-logo">
+                <i class="fas fa-hotel"></i> Hotel Boutique <span>Admin</span>
+            </div>
+            <div class="admin-nav-actions">
+                <div class="admin-user" id="abrirCuentaAdmin">
+                    <i class="fas fa-user-circle"></i> Mi cuenta
+                </div>
+                <div class="admin-logout-link" id="cerrarSesionAdmin">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-container">
+            <div class="admin-hero">
+                <div class="admin-hero-copy">
+                    <span class="admin-eyebrow">Centro de operaciones</span>
+                    <h2 id="adminNombre">Panel de Control</h2>
+                    <p id="adminResumenRol">Gestiona reservas, habitaciones y movimiento del hotel desde una sola vista.</p>
+                </div>
+                <div class="admin-hero-visual">
+                    <div class="admin-hero-card">
+                        <span>Estado del hotel</span>
+                        <strong id="adminHeroEstado">Cargando datos...</strong>
+                        <small id="adminHeroDetalle">Sincronizando reservas y disponibilidad</small>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-header">
+                <h2>Panel de Control</h2>
+                <p>Gestión de reservas, disponibilidad y reportes en tiempo real.</p>
+            </div>
+
+            <div class="dashboard-tabs">
+                <button id="btn-tab-reportes" class="tab-btn active" onclick="switchTab('reportes', event)">
+                    <i class="fas fa-chart-line"></i> Resumen
+                </button>
+                <button id="btn-tab-calendario" class="tab-btn" onclick="switchTab('calendario', event)">
+                    <i class="fas fa-calendar-alt"></i> Calendario
+                </button>
+                <button id="btn-tab-lista-reservas" class="tab-btn" onclick="switchTab('lista-reservas', event)">
+                    <i class="fas fa-list"></i> Reservas
+                </button>
+                <button id="btn-tab-habitaciones" class="tab-btn" onclick="switchTab('habitaciones', event)">
+                    <i class="fas fa-bed"></i> Habitaciones
+                </button>
+                <button id="btn-tab-usuarios" class="tab-btn" onclick="switchTab('usuarios', event)">
+                    <i class="fas fa-users"></i> Usuarios
+                </button>
+            </div>
+
+            <div id="tab-reportes" class="tab-content">
+                <div class="admin-metrics-grid">
+                    <article class="metric-card">
+                        <span>Ingresos activos</span>
+                        <strong id="metricIngresos">COP 0</strong>
+                        <small>Reservas reservadas y confirmadas</small>
+                    </article>
+                    <article class="metric-card">
+                        <span>Reservas activas</span>
+                        <strong id="metricActivas">0</strong>
+                        <small>Movimientos vigentes en el sistema</small>
+                    </article>
+                    <article class="metric-card">
+                        <span>Check-ins de hoy</span>
+                        <strong id="metricHoy">0</strong>
+                        <small>Entradas programadas para hoy</small>
+                    </article>
+                    <article class="metric-card">
+                        <span>Ocupación</span>
+                        <strong id="metricOcupacion">0%</strong>
+                        <small>Basado en estados de habitaciones</small>
+                    </article>
+                </div>
+
+                <div class="admin-panels-grid">
+                    <section class="admin-card admin-panel">
+                        <div class="admin-panel-head">
+                            <div>
+                                <span class="admin-panel-kicker">Actividad reciente</span>
+                                <h3>Reservas más recientes</h3>
+                            </div>
+                        </div>
+                        <div id="adminActividadLista" class="admin-activity-list"></div>
+                    </section>
+
+                    <section class="admin-card admin-panel">
+                        <div class="admin-panel-head">
+                            <div>
+                                <span class="admin-panel-kicker">Visión general</span>
+                                <h3>Estado operativo</h3>
+                            </div>
+                        </div>
+                        <div id="contenidoReportes" class="admin-overview-grid"></div>
+                    </section>
+                </div>
+            </div>
+
+            <div id="tab-calendario" class="tab-content admin-card" style="display: none;">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-panel-kicker">Planificación</span>
+                        <h3>Calendario de reservas</h3>
+                    </div>
+                </div>
+                <div id="calendar"></div>
+            </div>
+
+            <div id="tab-lista-reservas" class="tab-content admin-card" style="display: none;">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-panel-kicker">Control diario</span>
+                        <h3>Reservas del sistema</h3>
+                    </div>
+                </div>
+
+                <div class="admin-filters-grid">
+                    <div class="admin-filter-field">
+                        <label for="adminBuscarReserva">Buscar huésped</label>
+                        <input type="text" id="adminBuscarReserva" placeholder="Nombre o correo">
+                    </div>
+                    <div class="admin-filter-field">
+                        <label for="adminFiltroEstado">Estado</label>
+                        <select id="adminFiltroEstado">
+                            <option value="todos">Todos</option>
+                            <option value="reservada">Reservada</option>
+                            <option value="confirmada">Confirmada</option>
+                            <option value="cancelada">Cancelada</option>
+                            <option value="finalizada">Finalizada</option>
+                        </select>
+                    </div>
+                    <div class="admin-filter-field">
+                        <label for="adminFiltroTipo">Tipo de habitación</label>
+                        <select id="adminFiltroTipo">
+                            <option value="todos">Todos</option>
+                            <option value="estandar">Estándar</option>
+                            <option value="suite">Suite</option>
+                            <option value="familiar">Familiar</option>
+                        </select>
+                    </div>
+                    <div class="admin-filter-field">
+                        <label for="adminFiltroFecha">Fecha de entrada</label>
+                        <input type="date" id="adminFiltroFecha">
+                    </div>
+                    <div class="admin-filter-actions">
+                        <button type="button" class="admin-secondary-btn" id="limpiarFiltrosReservas">
+                            <i class="fas fa-rotate-left"></i> Limpiar filtros
+                        </button>
+                    </div>
+                </div>
+
+                <p id="adminResumenFiltros" class="admin-filter-summary">Cargando reservas...</p>
+
+                <div class="tabla-container tabla-admin-mejorada">
+                    <table class="tabla-reservas">
+                        <thead>
+                            <tr>
+                                <th>Huésped</th>
+                                <th>Habitación</th>
+                                <th>Fechas</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyReservas"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="tab-habitaciones" class="tab-content admin-card" style="display: none;">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-panel-kicker">Inventario visual</span>
+                        <h3>Habitaciones y disponibilidad</h3>
+                    </div>
+                </div>
+
+                <div class="admin-filters-grid habitaciones-filtros">
+                    <div class="admin-filter-field">
+                        <label for="adminBuscarHabitacion">Buscar</label>
+                        <input type="text" id="adminBuscarHabitacion" placeholder="Número, tipo o vista">
+                    </div>
+                    <div class="admin-filter-field">
+                        <label for="adminFiltroEstadoHabitacion">Estado</label>
+                        <select id="adminFiltroEstadoHabitacion">
+                            <option value="todos">Todos</option>
+                            <option value="disponible">Disponible</option>
+                            <option value="reservada">Reservada</option>
+                            <option value="ocupada">Ocupada</option>
+                            <option value="mantenimiento">Mantenimiento</option>
+                        </select>
+                    </div>
+                    <div class="admin-filter-field">
+                        <label for="adminFiltroTipoHabitacion">Tipo</label>
+                        <select id="adminFiltroTipoHabitacion">
+                            <option value="todos">Todos</option>
+                            <option value="estandar">Estándar</option>
+                            <option value="suite">Suite</option>
+                            <option value="familiar">Familiar</option>
+                        </select>
+                    </div>
+                    <div class="admin-filter-field">
+                        <label for="adminFiltroPisoHabitacion">Piso</label>
+                        <select id="adminFiltroPisoHabitacion">
+                            <option value="todos">Todos</option>
+                            <option value="1">Piso 1</option>
+                            <option value="2">Piso 2</option>
+                            <option value="3">Piso 3</option>
+                            <option value="4">Piso 4</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="adminHabitacionesGrid" class="admin-rooms-grid"></div>
+            </div>
+
+            <div id="tab-usuarios" class="tab-content admin-card" style="display: none;">
+                <div class="admin-panel-head">
+                    <div>
+                        <span class="admin-panel-kicker">Control de acceso</span>
+                        <h3>Usuarios del sistema</h3>
+                    </div>
+                </div>
+
+                <div class="admin-metrics-grid admin-users-metrics">
+                    <article class="metric-card">
+                        <span>Usuarios activos</span>
+                        <strong id="metricUsuariosActivos">0</strong>
+                        <small>Cuentas operativas y sin bloqueo</small>
+                    </article>
+                    <article class="metric-card">
+                        <span>Usuarios bloqueados</span>
+                        <strong id="metricUsuariosBloqueados">0</strong>
+                        <small>Cuentas con acceso restringido</small>
+                    </article>
+                    <article class="metric-card">
+                        <span>Clientes</span>
+                        <strong id="metricUsuariosClientes">0</strong>
+                        <small>Usuarios con rol cliente</small>
+                    </article>
+                    <article class="metric-card">
+                        <span>Equipo interno</span>
+                        <strong id="metricUsuariosStaff">0</strong>
+                        <small>Administración y recepción</small>
+                    </article>
+                </div>
+
+                <div class="admin-filters-grid usuarios-filtros">
+                    <div class="admin-filter-field">
+                        <label for="adminBuscarUsuario">Buscar usuario</label>
+                        <input type="text" id="adminBuscarUsuario" placeholder="Nombre o correo">
+                    </div>
+                    <div class="admin-filter-field">
+                        <label for="adminFiltroRolUsuario">Rol</label>
+                        <select id="adminFiltroRolUsuario">
+                            <option value="todos">Todos</option>
+                            <option value="administrador">Administrador</option>
+                            <option value="recepcionista">Recepcionista</option>
+                            <option value="cliente">Cliente</option>
+                        </select>
+                    </div>
+                    <div class="admin-filter-field">
+                        <label for="adminFiltroEstadoUsuario">Estado</label>
+                        <select id="adminFiltroEstadoUsuario">
+                            <option value="todos">Todos</option>
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
+                            <option value="suspendido">Suspendido</option>
+                        </select>
+                    </div>
+                    <div class="admin-filter-field">
+                        <label for="adminFiltroBloqueoUsuario">Acceso</label>
+                        <select id="adminFiltroBloqueoUsuario">
+                            <option value="todos">Todos</option>
+                            <option value="libre">Libre</option>
+                            <option value="bloqueado">Bloqueado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <p id="adminResumenUsuarios" class="admin-filter-summary">Cargando usuarios...</p>
+
+                <div class="tabla-container tabla-admin-mejorada">
+                    <table class="tabla-reservas">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Acceso</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyUsuariosAdmin"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="notificacionFlotante" style="position: fixed; bottom: -100px; right: 20px; background: #2e7d32; color: white; padding: 15px 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: bottom 0.5s ease; z-index: 9999; display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-envelope"></i> <span id="textoNotificacion">Mensaje enviado</span>
+        </div>
+    </section>
+
+    <div class="modal-auth" id="modalLogin">
+        <div class="modal-contenido">
+            <button class="cerrar-modal" id="cerrarLogin">&times;</button>
+
+            <h2>Iniciar sesión</h2>
+
+            <form id="formLogin" class="form-auth">
+                <div class="campo">
+                    <label for="loginEmail">Correo electrónico</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+
+                <div class="campo">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+
+                <button type="submit" class="btn-auth">Ingresar</button>
+                <p id="mensajeLogin" class="mensaje-form"></p>
+            </form>
+
+            <div class="extra-auth">
+                <p>¿No tienes cuenta?</p>
+                <a href="#" id="irARegistro">Crear una cuenta</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-auth" id="modalRegistro">
+        <div class="modal-contenido modal-registro-contenido">
+            <button class="cerrar-modal" id="cerrarRegistro">&times;</button>
+
+            <h2>Registrarse</h2>
+
+            <form id="formRegistro" class="form-auth form-registro-grid">
+                <div class="campo">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" required>
+                </div>
+
+                <div class="campo">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido">
+                </div>
+
+                <div class="campo">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="campo">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" id="telefono">
+                </div>
+
+                <div class="campo campo-ancho">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion">
+                </div>
+
+                <div class="campo">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" required>
+                </div>
+
+
+                <button type="submit" class="btn-auth btn-ancho">Crear cuenta</button>
+                <p id="mensajeRegistro" class="mensaje-form btn-ancho"></p>
+            </form>
+
+            <div class="extra-auth">
+                <p>¿Ya tienes cuenta?</p>
+                <a href="#" id="irALogin">Iniciar sesión</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-auth" id="modalCuenta">
+        <div class="modal-contenido modal-registro-contenido">
+            <button class="cerrar-modal" id="cerrarCuenta">&times;</button>
+
+            <h2>Mi cuenta</h2>
+
+            <div class="panel-cuenta">
+                <div class="cuenta-item"><i class="fas fa-user-gold"></i> <div><span>Nombre Completo</span><strong id="cuentaNombre"></strong></div></div>
+                <div class="cuenta-item"><i class="fas fa-envelope"></i> <div><span>Correo Electrónico</span><strong id="cuentaEmail"></strong></div></div>
+                <div class="cuenta-item"><i class="fas fa-id-badge"></i> <div><span>Tipo de Miembro</span><strong id="cuentaRol"></strong></div></div>
+            </div>
+
+            <div class="acciones-cuenta">
+                <button class="btn-auth" id="btnVerReservas" type="button"><i class="fas fa-concierge-bell"></i> Mis Reservas</button>
+                <button class="btn-auth btn-secundario" id="btnVerNotificaciones" type="button"><i class="fas fa-bell"></i> Notificaciones <span id="badgeNotificaciones" class="badge-notificaciones oculto">0</span></button>
+                <button class="btn-auth btn-secundario" id="btnEditarPerfil" type="button"><i class="fas fa-user-edit"></i> Editar Perfil</button>
+                <button class="btn-auth btn-cerrar-sesion" id="cerrarSesionBtn" type="button"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</button>
+            </div>
+
+            <div id="panelReservas" class="panel-oculto">
+                <h3 class="subtitulo-panel">Mis reservas</h3>
+                <div id="listaReservas"></div>
+            </div>
+
+            <div id="panelNotificaciones" class="panel-oculto">
+                <div class="panel-header-inline">
+                    <h3 class="subtitulo-panel">Notificaciones</h3>
+                    <button type="button" class="admin-secondary-btn" id="btnLeerTodasNotificaciones">Marcar todas como leídas</button>
+                </div>
+                <div id="listaNotificaciones"></div>
+            </div>
+
+            <div id="panelEditarPerfil" class="panel-oculto">
+                <h3 class="subtitulo-panel">Editar mis datos</h3>
+
+                <form id="formEditarPerfil" class="form-auth form-registro-grid">
+                    <div class="campo">
+                        <label for="editNombre">Nombre</label>
+                        <input type="text" id="editNombre" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="editApellido">Apellido</label>
+                        <input type="text" id="editApellido">
+                    </div>
+
+                    <div class="campo">
+                        <label for="editEmail">Correo electrónico</label>
+                        <input type="email" id="editEmail" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="editTelefono">Teléfono</label>
+                        <input type="text" id="editTelefono">
+                    </div>
+
+                    <div class="campo campo-ancho">
+                        <label for="editDireccion">Dirección</label>
+                        <input type="text" id="editDireccion">
+                    </div>
+
+                    <button type="submit" class="btn-auth btn-ancho">Guardar cambios</button>
+                    <p id="mensajeEditarPerfil" class="mensaje-form btn-ancho"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-auth modal-confirmacion" id="modalConfirmacionAccion">
+        <div class="modal-contenido modal-confirmacion-contenido">
+            <button class="cerrar-modal" id="cerrarConfirmacion">&times;</button>
+            <div class="modal-confirmacion-icono">
+                <i class="fas fa-circle-exclamation"></i>
+            </div>
+            <h2 id="tituloConfirmacion">Confirmar acción</h2>
+            <p id="mensajeConfirmacion" class="modal-confirmacion-texto">¿Seguro que deseas continuar?</p>
+            <div class="modal-confirmacion-botones">
+                <button type="button" class="btn-auth btn-secundario" id="btnCancelarConfirmacion">Volver</button>
+                <button type="button" class="btn-auth" id="btnAceptarConfirmacion">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-auth" id="modalPagoReserva">
+        <div class="modal-contenido modal-pago-contenido">
+            <button class="cerrar-modal" id="cerrarPagoReserva">&times;</button>
+            <h2>Registrar pago</h2>
+
+            <div id="resumenPagoReserva" class="resumen-pago-admin"></div>
+
+            <form id="formPagoReserva" class="form-auth">
+                <div class="campo">
+                    <label for="metodoPagoReserva">Método de pago</label>
+                    <select id="metodoPagoReserva" required>
+                        <option value="efectivo">Efectivo</option>
+                        <option value="tarjeta">Tarjeta</option>
+                        <option value="transferencia">Transferencia</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="montoPagoReserva">Monto</label>
+                    <input type="number" id="montoPagoReserva" min="1" step="0.01" required>
+                </div>
+
+                <button type="submit" class="btn-auth">Guardar pago</button>
+                <p id="mensajePagoReserva" class="mensaje-form"></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-auth" id="modalEditarReserva">
+        <div class="modal-contenido modal-editar-reserva-contenido">
+            <button class="cerrar-modal" id="cerrarEditarReserva">&times;</button>
+            <h2>Reprogramar reserva</h2>
+
+            <form id="formEditarReservaUsuario" class="form-auth form-registro-grid">
+                <input type="hidden" id="editReservaId">
+                <input type="hidden" id="editReservaHabitacionId">
+
+                <div class="campo campo-ancho">
+                    <label for="editReservaHabitacionTexto">Habitación asignada</label>
+                    <input type="text" id="editReservaHabitacionTexto" readonly>
+                </div>
+
+                <div class="campo">
+                    <label for="editReservaFechaInicio">Nuevo check-in</label>
+                    <input type="date" id="editReservaFechaInicio" required>
+                </div>
+
+                <div class="campo">
+                    <label for="editReservaFechaFin">Nuevo check-out</label>
+                    <input type="date" id="editReservaFechaFin" required>
+                </div>
+
+                <button type="submit" class="btn-auth btn-ancho">Guardar cambios</button>
+                <p id="mensajeEditarReservaUsuario" class="mensaje-form btn-ancho"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="scrip.js"></script>
+</body>
+</html>
